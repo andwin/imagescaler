@@ -5,7 +5,7 @@ require_relative '../image_scaler'
 
 class ImageScalerTest < ActiveSupport::TestCase
   class ScalerImage < ActiveSupport::TestCase
-    test "scaling a portrait image should keep aspect ratio" do
+    test "should keep aspect rato of portrait image" do
       Dir.mktmpdir do |dir|
         output_file_path = ImageScaler.rescale_image('test/files/oops.jpg', dir, 640, 480)
         width, heigth = FastImage.size(output_file_path)
@@ -26,7 +26,7 @@ class ImageScalerTest < ActiveSupport::TestCase
     end
   end
 
-  test "output_file_name should return the correct file name" do
+  test "should return expected file name" do
     assert_equal 'picture.jpg', ImageScaler.output_file_name('/path/to/picture.jpg')
     assert_equal 'picture_cr2.jpg', ImageScaler.output_file_name('/path/to/picture.CR2')
   end
