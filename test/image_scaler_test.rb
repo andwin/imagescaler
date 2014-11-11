@@ -14,6 +14,16 @@ class ImageScalerTest < ActiveSupport::TestCase
         assert_equal 480, heigth
       end
     end
+
+    test "should keep aspect ratio of landscape image" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/never-forget.jpg', dir, 640, 480)
+        width, heigth = FastImage.size(output_file_path)
+
+        assert_equal 640, width
+        assert_equal 203, heigth
+      end
+    end
   end
 
   test "output_file_name should return the correct file name" do
