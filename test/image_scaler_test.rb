@@ -1,37 +1,38 @@
 require 'tmpdir'
-require 'fastimage'
 require 'test_helper'
+require 'RMagick'
 require_relative '../image_scaler'
+include Magick
 
 class ImageScalerTest < ActiveSupport::TestCase
   class ScalerImage < ActiveSupport::TestCase
     test "should keep aspect rato of portrait image" do
       Dir.mktmpdir do |dir|
         output_file_path = ImageScaler.rescale_image('test/files/oops.jpg', dir, 640, 480)
-        width, heigth = FastImage.size(output_file_path)
+        output_image = Image.read(output_file_path).first()
 
-        assert_equal 358, width
-        assert_equal 480, heigth
+        assert_equal 358, output_image.columns
+        assert_equal 480, output_image.rows
       end
     end
 
     test "should keep aspect ratio of landscape image" do
       Dir.mktmpdir do |dir|
         output_file_path = ImageScaler.rescale_image('test/files/never-forget.jpg', dir, 640, 480)
-        width, heigth = FastImage.size(output_file_path)
+        output_image = Image.read(output_file_path).first()
 
-        assert_equal 640, width
-        assert_equal 203, heigth
+        assert_equal 640, output_image.columns
+        assert_equal 203, output_image.rows
       end
     end
 
     test "should scale up smaller images" do
       Dir.mktmpdir do |dir|
         output_file_path = ImageScaler.rescale_image('test/files/toad.jpg', dir, 640, 480)
-        width, heigth = FastImage.size(output_file_path)
+        output_image = Image.read(output_file_path).first()
 
-        assert_equal 640, width
-        assert_equal 480, heigth
+        assert_equal 640, output_image.columns
+        assert_equal 480, output_image.rows
       end
     end
   end
