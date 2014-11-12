@@ -24,6 +24,16 @@ class ImageScalerTest < ActiveSupport::TestCase
         assert_equal 203, heigth
       end
     end
+
+    test "should scale up smaller images" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/toad.jpg', dir, 640, 480)
+        width, heigth = FastImage.size(output_file_path)
+
+        assert_equal 640, width
+        assert_equal 480, heigth
+      end
+    end
   end
 
   test "should return expected file name" do
