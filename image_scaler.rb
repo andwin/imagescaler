@@ -17,6 +17,6 @@ class ImageScaler
 
     return basename if extension == 'jpg'
 
-    return File.basename(basename, File.extname(basename)) + "_" + extension + '.jpg'
+    return File.basename(basename, File.extname(basename)) + '_' + extension + '.jpg'
   end
 end
