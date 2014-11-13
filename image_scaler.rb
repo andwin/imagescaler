@@ -10,7 +10,7 @@ class ImageScaler
   end
 
   def self.rescale_dir source_dir, destination_dir
-    Dir.entries(source_dir).each do |file_name|
+    Dir.entries(source_dir).reject{ |a| a =~ /^\.{1,2}$/ }.each do |file_name|
       source_path = File.join(source_dir, file_name)
       puts source_path + ' -> ' + destination_dir
     end
