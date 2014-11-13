@@ -2,6 +2,13 @@ require 'RMagick'
 include Magick
 
 class ImageScaler
+  def self.rescale_dir source_dir, destination_dir
+    Dir.entries(source_dir).each do |file_name|
+      source_path = File.join(source_dir, file_name)
+      puts source_path + ' -> ' + destination_dir
+    end
+  end
+
   def self.rescale_image source_path, output_dir, width, height
     img = Image.read(source_path).first()
     scaled_image = img.resize_to_fit(width, height)
