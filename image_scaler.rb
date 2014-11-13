@@ -2,6 +2,13 @@ require 'RMagick'
 include Magick
 
 class ImageScaler
+  def self.run argv
+    source_dir = argv[0]
+    destination_dir = argv[1]
+
+    rescale_dir source_dir, destination_dir
+  end
+
   def self.rescale_dir source_dir, destination_dir
     Dir.entries(source_dir).each do |file_name|
       source_path = File.join(source_dir, file_name)
@@ -27,3 +34,5 @@ class ImageScaler
     return File.basename(basename, File.extname(basename)) + '_' + extension + '.jpg'
   end
 end
+
+ImageScaler.run ARGV
