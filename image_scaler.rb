@@ -23,11 +23,14 @@ class ImageScaler
   end
 
   def self.rescale_image source_path, output_dir, width, height
-    img = Image.read(source_path).first()
-    scaled_image = img.resize_to_fit(width, height)
-    output_path = File.join(output_dir, output_file_name(source_path))
-    scaled_image.write(output_path)
-    return output_path
+    begin
+      img = Image.read(source_path).first()
+      scaled_image = img.resize_to_fit(width, height)
+      output_path = File.join(output_dir, output_file_name(source_path))
+      scaled_image.write(output_path)
+      return output_path
+    rescue
+    end
   end
 
   def self.output_file_name source_path
