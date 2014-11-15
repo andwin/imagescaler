@@ -16,6 +16,8 @@ class ImageScaler
       source_path = File.join(source_dir, file_name)
       if File.directory?(source_path)
         rescale_dir File.join(source_dir, file_name), File.join(destination_dir, file_name)
+      else
+        rescale_image source_path, destination_dir, 640, 480
       end
     end
   end
