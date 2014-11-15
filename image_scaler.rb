@@ -14,7 +14,6 @@ class ImageScaler
 
     Dir.entries(source_dir).reject{ |a| a =~ /^\.{1,2}$/ }.each do |file_name|
       source_path = File.join(source_dir, file_name)
-#      puts source_path + ' -> ' + destination_dir
       if File.directory?(source_path)
         rescale_dir File.join(source_dir, file_name), File.join(destination_dir, file_name)
       end
