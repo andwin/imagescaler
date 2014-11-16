@@ -1,7 +1,7 @@
 require 'tmpdir'
 require 'test_helper'
 require 'RMagick'
-require_relative '../image_scaler'
+require_relative '../lib/image_scaler'
 include Magick
 
 class ImageScalerTest < ActiveSupport::TestCase
