@@ -35,6 +35,17 @@ class ImageScalerTest < ActiveSupport::TestCase
         assert_equal 480, output_image.rows
       end
     end
+
+    test "should work with png images" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/arch.png', dir, 640, 480)
+        output_image = Image.read(output_file_path).first()
+
+        assert_equal 'arch_png.jpg', File.basename(output_file_path)
+        assert_equal 480, output_image.columns
+        assert_equal 480, output_image.rows
+      end
+    end
   end
 
   test "should return expected file name" do
