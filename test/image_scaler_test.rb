@@ -5,7 +5,7 @@ require_relative '../image_scaler'
 include Magick
 
 class ImageScalerTest < ActiveSupport::TestCase
-  class ScalerImage < ActiveSupport::TestCase
+  class RescaleImage < ActiveSupport::TestCase
     test "should keep aspect rato of portrait image" do
       Dir.mktmpdir do |dir|
         output_file_path = ImageScaler.rescale_image('test/files/oops.jpg', dir, 640, 480)
