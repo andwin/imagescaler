@@ -12,23 +12,23 @@ class ImageScaler
   def self.rescale_dir source_dir, destination_dir
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
 
-    Dir.entries(source_dir).each do |file_name|
-      next if file_name.starts_with? '.'
+    Dir.entries(source_dir).each do |filename|
+      next if filename.starts_with? '.'
 
-      source_path = File.join(source_dir, file_name)
+      source_path = File.join(source_dir, filename)
       if File.directory?(source_path)
-        rescale_dir File.join(source_dir, file_name), File.join(destination_dir, file_name)
+        rescale_dir File.join(source_dir, filename), File.join(destination_dir, filename)
       else
         rescale_image source_path, destination_dir, 640, 480
       end
     end
   end
 
-  def self.rescale_image source_path, output_dir, width, height
+  def self.rescale_image source_path, destination_dir, width, height
     begin
       img = Image.read(source_path).first()
       scaled_image = img.resize_to_fit(width, height)
-      output_path = File.join(output_dir, output_file_name(source_path))
+      output_path = File.join(destination_dir, output_file_name(source_path))
       scaled_image.write(output_path)
       return output_path
     rescue
