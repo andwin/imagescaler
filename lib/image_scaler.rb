@@ -12,7 +12,9 @@ class ImageScaler
   def self.rescale_dir source_dir, destination_dir
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
 
-    Dir.entries(source_dir).reject{ |a| a =~ /^\.{1,2}$/ }.each do |file_name|
+    Dir.entries(source_dir).each do |file_name|
+      next if file_name.starts_with? '.'
+
       source_path = File.join(source_dir, file_name)
       if File.directory?(source_path)
         rescale_dir File.join(source_dir, file_name), File.join(destination_dir, file_name)
