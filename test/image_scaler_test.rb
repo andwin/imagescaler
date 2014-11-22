@@ -5,6 +5,17 @@ require_relative '../lib/image_scaler'
 include Magick
 
 class ImageScalerTest < ActiveSupport::TestCase
+  class RescaleDir < ActiveSupport::TestCase
+    test "should create all image files in output directory" do
+      Dir.mktmpdir do |dir|
+        ImageScaler.rescale_dir('test/files', dir)
+
+        assert_equal ['.', '..', 'arch_png.jpg', 'dinosaurs', 'never-forget.jpg', 'oops.jpg', 'toad.jpg'], Dir.entries(dir)
+        assert_equal ['.', '..', 'dinosaur.jpg'], Dir.entries(File.join(dir, 'dinosaurs'))
+      end
+    end
+  end
+
   class RescaleImage < ActiveSupport::TestCase
     test "should keep aspect rato of portrait image" do
       Dir.mktmpdir do |dir|
