@@ -13,7 +13,7 @@ class ImageScaler
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
 
     Dir.entries(source_dir).each do |filename|
-      next if filename.starts_with? '.'
+      next if filename.start_with? '.'
 
       source_path = File.join(source_dir, filename)
       if File.directory?(source_path)
