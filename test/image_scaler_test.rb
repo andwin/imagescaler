@@ -10,8 +10,8 @@ class ImageScalerTest < ActiveSupport::TestCase
       Dir.mktmpdir do |dir|
         ImageScaler.rescale_dir('test/files', dir)
 
-        assert_equal ['.', '..', 'arch_png.jpg', 'dinosaurs', 'never-forget.jpg', 'oops.jpg', 'toad.jpg'], Dir.entries(dir)
-        assert_equal ['.', '..', 'dinosaur.jpg'], Dir.entries(File.join(dir, 'dinosaurs'))
+        assert_equal ['.', '..', 'arch_png.jpg', 'dinosaurs', 'never-forget.jpg', 'oops.jpg', 'toad.jpg'].sort, Dir.entries(dir).sort
+        assert_equal ['.', '..', 'dinosaur.jpg'].sort, Dir.entries(File.join(dir, 'dinosaurs')).sort
       end
     end
   end
