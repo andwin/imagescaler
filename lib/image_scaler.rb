@@ -19,17 +19,17 @@ class ImageScaler
       if File.directory?(source_path)
         rescale_dir File.join(source_dir, filename), File.join(destination_dir, filename)
       else
-        rescale_image source_path, destination_dir, 640, 480
+        rescale_image source_path, destination_dir, 640, 480, 85
       end
     end
   end
 
-  def self.rescale_image source_path, destination_dir, width, height
+  def self.rescale_image source_path, destination_dir, width, height, quality=85
     begin
       img = Image.read(source_path).first()
       scaled_image = img.resize_to_fit(width, height)
       output_path = File.join(destination_dir, output_file_name(source_path))
-      scaled_image.write(output_path)
+      scaled_image.write(output_path) { self.quality = quality }
       return output_path
     rescue
     end
