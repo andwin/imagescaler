@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'lib/image_scaler'
 
 source_dir = ARGV[0]
