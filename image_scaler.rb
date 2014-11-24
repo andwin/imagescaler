@@ -1,3 +1,6 @@
 require_relative 'lib/image_scaler'
 
-ImageScaler.run ARGV
+source_dir = ARGV[0]
+destination_dir = ARGV[1]
+
+ImageScaler.rescale_dir source_dir, destination_dir

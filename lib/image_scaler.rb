@@ -2,13 +2,6 @@ require 'RMagick'
 include Magick
 
 class ImageScaler
-  def self.run argv
-    source_dir = argv[0]
-    destination_dir = argv[1]
-
-    rescale_dir source_dir, destination_dir
-  end
-
   def self.rescale_dir source_dir, destination_dir
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
 
