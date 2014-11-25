@@ -3,6 +3,7 @@ GEM
   specs:
     minitest (5.4.1)
     rmagick (2.13.3)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
@@ -10,3 +11,4 @@ PLATFORMS
 DEPENDENCIES
   minitest
   rmagick
+  slop
