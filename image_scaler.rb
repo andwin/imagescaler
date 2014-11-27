@@ -2,11 +2,19 @@
 require 'slop'
 require_relative 'lib/image_scaler'
 
-options = Slop.parse do
+options = Slop.new do
   banner 'Usage: image_scaler.rb source_dir destination_dir [options]'
 
   on 'w', 'width', 'Width of output images', argument: :required
   on 'h', 'height', 'Height of output images', argument: :required
+end
+
+begin
+  options.parse
+rescue Slop::Error => e
+  puts e.message
+  puts options
+  exit 1
 end
 
 source_dir = ARGV[0]
