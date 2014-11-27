@@ -2,7 +2,7 @@
 require 'slop'
 require_relative 'lib/image_scaler'
 
-options = Slop.new do
+options = Slop.new help: true do
   banner 'Usage: image_scaler.rb source_dir destination_dir [options]'
 
   on 'w', 'width', 'Width of output images', argument: true, required: true
