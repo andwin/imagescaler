@@ -8,7 +8,7 @@ class ImageScalerTest < ActiveSupport::TestCase
   class RescaleDir < ActiveSupport::TestCase
     test "should create all image files in output directory" do
       Dir.mktmpdir do |dir|
-        ImageScaler.rescale_dir('test/files', dir)
+        ImageScaler.rescale_dir('test/files', dir, 640, 480)
 
         assert_equal ['.', '..', 'arch_png.jpg', 'dinosaurs', 'never-forget.jpg', 'oops.jpg', 'toad.jpg'].sort, Dir.entries(dir).sort
         assert_equal ['.', '..', 'dinosaur.jpg'].sort, Dir.entries(File.join(dir, 'dinosaurs')).sort

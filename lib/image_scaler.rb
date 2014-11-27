@@ -2,7 +2,7 @@ require 'RMagick'
 include Magick
 
 class ImageScaler
-  def self.rescale_dir source_dir, destination_dir
+  def self.rescale_dir source_dir, destination_dir, width, height
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
 
     Dir.entries(source_dir).each do |filename|
@@ -10,9 +10,9 @@ class ImageScaler
 
       source_path = File.join(source_dir, filename)
       if File.directory?(source_path)
-        rescale_dir File.join(source_dir, filename), File.join(destination_dir, filename)
+        rescale_dir File.join(source_dir, filename), File.join(destination_dir, filename), width, height
       else
-        rescale_image source_path, destination_dir, 640, 480, 85
+        rescale_image source_path, destination_dir, width, height
       end
     end
   end
