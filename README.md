@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/andwin/imagescaler.svg?branch=master)](https://travis-ci.org/andwin/imagescaler)
 # ImageScaler
 Command line utillity to rescale photo collections
 
