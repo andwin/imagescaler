@@ -7,6 +7,7 @@ options = Slop.new help: true do
 
   on 'width', 'Width of output images', argument: true, required: true, as: Integer
   on 'height', 'Height of output images', argument: true, required: true, as: Integer
+  on 'q', 'quality', 'Output image quality', argument: true, as: Integer
 end
 
 begin
