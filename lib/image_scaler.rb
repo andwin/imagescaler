@@ -12,18 +12,18 @@ class ImageScaler
       if File.directory?(source_path)
         rescale_dir File.join(source_dir, filename), File.join(destination_dir, filename), width, height, options
       else
-        rescale_image source_path, destination_dir, width, height, options[:quality]
+        rescale_image source_path, destination_dir, width, height, options
       end
     end
   end
 
-  def self.rescale_image source_path, destination_dir, width, height, quality=nil
-    quality ||= 85
+  def self.rescale_image source_path, destination_dir, width, height, options={}
+    options[:quality] ||= 85
     begin
       img = Image.read(source_path).first()
       scaled_image = img.resize_to_fit(width, height)
       output_path = File.join(destination_dir, output_file_name(source_path))
-      scaled_image.write(output_path) { self.quality = quality }
+      scaled_image.write(output_path) { self.quality = options[:quality] }
       return output_path
     rescue
     end
