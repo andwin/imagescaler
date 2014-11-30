@@ -25,4 +25,4 @@ end
 
 destination_dir = ARGV[1]
 
-ImageScaler.rescale_dir source_dir, destination_dir, options[:height], options[:height]
+ImageScaler.rescale_dir source_dir, destination_dir, options[:width], options[:height], options.to_hash
