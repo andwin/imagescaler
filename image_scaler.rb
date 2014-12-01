@@ -8,6 +8,7 @@ options = Slop.new help: true do
   on 'width', 'Width of output images', argument: true, required: true, as: Integer
   on 'height', 'Height of output images', argument: true, required: true, as: Integer
   on 'q', 'quality', 'Output image quality', argument: true, as: Integer
+  on 'v', 'verbose', 'Verbose output'
 end
 
 begin
@@ -25,5 +26,16 @@ unless Dir.exists? source_dir
 end
 
 destination_dir = ARGV[1]
+
+if options[:verbose]
+  puts 'Source directory: ' + source_dir
+  puts 'Destination directory: ' + destination_dir
+  options.to_hash.each do |key, value|
+    unless value.nil?
+      puts key.to_s + ': ' + value.to_s
+    end
+  end
+  puts
+end
 
 ImageScaler.rescale_dir source_dir, destination_dir, options[:width], options[:height], options.to_hash
