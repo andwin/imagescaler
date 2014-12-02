@@ -14,6 +14,17 @@ class ImageScalerTest < ActiveSupport::TestCase
         assert_equal ['.', '..', 'dinosaur.jpg'].sort, Dir.entries(File.join(dir, 'dinosaurs')).sort
       end
     end
+
+    test "should send all options to rescale_image for every image" do
+      Dir.mktmpdir do |dir|
+        quality = 50
+        ImageScaler.rescale_dir('test/files', dir, 640, 480, {quality: quality})
+
+        output_image = Image.read(File.join(dir, 'arch_png.jpg')).first()
+
+        assert_equal quality, output_image.quality
+      end
+    end
   end
 
   class RescaleImage < ActiveSupport::TestCase
@@ -55,6 +66,25 @@ class ImageScalerTest < ActiveSupport::TestCase
         assert_equal 'arch_png.jpg', File.basename(output_file_path)
         assert_equal 480, output_image.columns
         assert_equal 480, output_image.rows
+      end
+    end
+
+    test "should use default image quality if not specified" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/arch.png', dir, 640, 480)
+        output_image = Image.read(output_file_path).first()
+
+        assert_equal 85, output_image.quality
+      end
+    end
+
+    test "should use specified quality" do
+      Dir.mktmpdir do |dir|
+        quality = 50
+        output_file_path = ImageScaler.rescale_image('test/files/arch.png', dir, 640, 480, {quality: quality})
+        output_image = Image.read(output_file_path).first()
+
+        assert_equal quality, output_image.quality
       end
     end
   end
