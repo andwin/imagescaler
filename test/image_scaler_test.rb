@@ -89,8 +89,10 @@ class ImageScalerTest < ActiveSupport::TestCase
     end
   end
 
-  test "should return expected file name" do
-    assert_equal 'picture.jpg', ImageScaler.output_file_name('/path/to/picture.jpg')
-    assert_equal 'picture_cr2.jpg', ImageScaler.output_file_name('/path/to/picture.CR2')
+  class OutputFileName < ActiveSupport::TestCase
+    test "should return expected file name" do
+      assert_equal 'picture.jpg', ImageScaler.output_file_name('/path/to/picture.jpg')
+      assert_equal 'picture_cr2.jpg', ImageScaler.output_file_name('/path/to/picture.CR2')
+    end
   end
 end
