@@ -8,6 +8,7 @@ options = Slop.new help: true do
   on 'width', 'Width of output images', argument: true, required: true, as: Integer
   on 'height', 'Height of output images', argument: true, required: true, as: Integer
   on 'q', 'quality', 'Output image quality', argument: true, as: Integer
+  on 'd', 'delete', 'Delete extra files from distination'
   on 'v', 'verbose', 'Verbose output'
 end
 

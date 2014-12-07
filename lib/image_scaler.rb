@@ -5,7 +5,7 @@ include Magick
 class ImageScaler
   def self.rescale_dir source_dir, destination_dir, width, height, options
     Dir.mkdir(destination_dir) unless Dir.exist?(destination_dir)
-    remove_extra_files_from_distination source_dir, destination_dir
+    remove_extra_files_from_distination(source_dir, destination_dir) if options[:delete]
 
     Dir.entries(source_dir).each do |filename|
       next if filename.start_with? '.'

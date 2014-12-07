@@ -26,7 +26,7 @@ class ImageScalerTest < ActiveSupport::TestCase
       end
     end
 
-    test "should remove files from destination directory that doesn't exist in source directory" do
+    test "should not remove files from destination directory that doesn't exist in source directory if delete option not set" do
       Dir.mktmpdir do |dir|
         test_file_1 = File.join(dir, 'file.txt')
         test_file_2 = File.join(dir, 'dinosaurs', 'file.txt')
@@ -35,6 +35,21 @@ class ImageScalerTest < ActiveSupport::TestCase
         FileUtils.touch(test_file_2)
 
         ImageScaler.rescale_dir('test/files', dir, 640, 480, {})
+
+        assert File.exists?(test_file_1), 'This file doesn\'t exist in the source directory so it should have been removed'
+        assert File.exists?(test_file_2), 'This file doesn\'t exist in the source directory so it should have been removed'
+      end
+    end
+
+    test "should remove files from destination directory that doesn't exist in source directory if delete option is set" do
+      Dir.mktmpdir do |dir|
+        test_file_1 = File.join(dir, 'file.txt')
+        test_file_2 = File.join(dir, 'dinosaurs', 'file.txt')
+        FileUtils.touch(test_file_1)
+        Dir.mkdir(File.join(dir, 'dinosaurs'))
+        FileUtils.touch(test_file_2)
+
+        ImageScaler.rescale_dir('test/files', dir, 640, 480, {delete: true})
 
         refute File.exists?(test_file_1), 'This file doesn\'t exist in the source directory so it should have been removed'
         refute File.exists?(test_file_2), 'This file doesn\'t exist in the source directory so it should have been removed'
