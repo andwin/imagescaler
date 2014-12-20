@@ -44,7 +44,8 @@ class ImageScaler
       end
 
       return destination_path
-    rescue
+    rescue Exception => e
+      puts 'Exception while rescaling image: ' + e.message
     end
   end
 
