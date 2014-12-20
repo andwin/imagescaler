@@ -38,6 +38,7 @@ class ImageScaler
       scaled_image = img.resize_to_fit(width, height)
       destination_path = File.join(destination_dir, output_file_name(source_path))
       scaled_image.write(destination_path) { self.quality = options[:quality] }
+      GC.start
 
       if options[:verbose]
         puts source_path + ' => ' + destination_path
