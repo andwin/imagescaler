@@ -33,16 +33,14 @@ class ImageScaler
 
   def self.rescale_image source_path, destination_dir, width, height, options={}
     options[:quality] ||= 85
+    puts source_path + ' => ' + destination_path if options[:verbose]
+
     begin
       img = Image.read(source_path).first()
       scaled_image = img.resize_to_fit(width, height)
       destination_path = File.join(destination_dir, output_file_name(source_path))
       scaled_image.write(destination_path) { self.quality = options[:quality] }
       GC.start
-
-      if options[:verbose]
-        puts source_path + ' => ' + destination_path
-      end
 
       return destination_path
     rescue Exception => e
