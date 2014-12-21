@@ -5,20 +5,17 @@ Command line utillity to rescale photo collections
 ## Setup
 You need to have ruby and [image magic](http://www.imagemagick.org/) installed.
 
-### Arch
 ```
+# Arch
 pacman -S imagemagick
-`````
 
-### Ubuntu/Debian
-```
+# Ubuntu/Debian
 apt-get install imagemagick
-`````
 
-### Mac
-```
+# Mac
 brew install imagemagick
 ```
+
 
 Install dependencies by running
 ```
