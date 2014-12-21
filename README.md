@@ -3,7 +3,7 @@
 Command line utillity to rescale photo collections
 
 ## Setup
-You need to have ruby and [image magic](http://www.imagemagick.org/) installed.
+You need to have [Ruby](https://www.ruby-lang.org/en/) and [ImageMagick](http://www.imagemagick.org/) installed.
 ```
 # Arch
 pacman -S imagemagick
@@ -15,7 +15,7 @@ apt-get install imagemagick
 brew install imagemagick
 ```
 
-To rescale raw files you need to install ufraw
+To rescale raw files you need to install [UFRaw](http://ufraw.sourceforge.net/)
 ```
 # Arch
 pacman -S gimp-ufraw
