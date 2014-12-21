@@ -17,17 +17,17 @@ brew install imagemagick
 
 To rescale raw files you need to install ufraw
 ```
-#arch
+# Arch
 pacman -S gimp-ufraw
 
-#ubuntu
+# Ubuntu
 apt-get install ufraw
 
-#mac
+# Mac
 brew install ufraw
 ```
 
-Install dependencies by running
+Install the ruby dependencies by running
 ```
 bundle
 ```
