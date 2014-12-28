@@ -9,7 +9,7 @@ You need to have [Ruby](https://www.ruby-lang.org/en/) and [ImageMagick](http://
 pacman -S imagemagick
 
 # Ubuntu/Debian
-apt-get install imagemagick
+apt-get install imagemagick libmagickwand-dev
 
 # Mac
 brew install imagemagick
