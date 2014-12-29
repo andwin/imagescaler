@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'digest'
 require 'RMagick'
 include Magick
 
@@ -36,9 +37,18 @@ class ImageScaler
     destination_path = File.join(destination_dir, output_file_name(source_path))
     puts source_path + ' => ' + destination_path if options[:verbose]
 
+    source_hash = Digest::SHA1.file(source_path).hexdigest
+    config_string = "#{source_hash},#{width},#{height},#{options[:quality]}"
+
+    if skip_file? destination_path, config_string
+      puts 'Skipping because destination file exists' if options[:verbose]
+      return
+    end
+
     begin
       img = Image.read(source_path).first()
       scaled_image = img.resize_to_fit(width, height)
+      scaled_image['comment'] = config_string
       scaled_image.write(destination_path) { self.quality = options[:quality] }
       GC.start
 
@@ -55,5 +65,19 @@ class ImageScaler
     return basename if extension == 'jpg'
 
     return File.basename(basename, File.extname(basename)) + '_' + extension + '.jpg'
+  end
+
+  def self.skip_file? destination_path, config_string
+    begin
+      return false unless File.exists?(destination_path)
+
+      destination_image = Image.read(destination_path).first()
+      return false if destination_image['comment'] != config_string
+    rescue Exception => e
+      puts e.message
+      return false
+    end
+
+    return true
   end
 end

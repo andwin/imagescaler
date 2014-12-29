@@ -140,4 +140,26 @@ class ImageScalerTest < ActiveSupport::TestCase
       assert_equal 'picture_cr2.jpg', ImageScaler.output_file_name('/path/to/picture.CR2')
     end
   end
+
+  class SkipFile < ActiveSupport::TestCase
+    test "should not skip files when destination file does not exist" do
+      refute ImageScaler.skip_file?('/does_not_exist.jpg', '')
+    end
+
+    test "should not skip files when the destination file does not have the same config string as the source file" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/arch.png', dir, 640, 480)
+
+        refute ImageScaler.skip_file?(output_file_path, 'wrong config string')
+      end
+    end
+
+    test "should skip files when the destination file has the same config string as the source file" do
+      Dir.mktmpdir do |dir|
+        output_file_path = ImageScaler.rescale_image('test/files/arch.png', dir, 640, 480)
+
+        assert ImageScaler.skip_file?(output_file_path, '0e08d99c01b66845351514f0ccac33b442ee9393,640,480,85')
+      end
+    end
+  end
 end
