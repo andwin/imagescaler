@@ -36,8 +36,8 @@ class ImageScalerTest < ActiveSupport::TestCase
 
         ImageScaler.rescale_dir('test/files', dir, 640, 480, {})
 
-        assert File.exists?(test_file_1), 'This file doesn\'t exist in the source directory so it should have been removed'
-        assert File.exists?(test_file_2), 'This file doesn\'t exist in the source directory so it should have been removed'
+        assert File.exists?(test_file_1), 'The delete option was not set so this file should not have been deleted'
+        assert File.exists?(test_file_2), 'The delete option was not set so this file should not have been deleted'
       end
     end
 
