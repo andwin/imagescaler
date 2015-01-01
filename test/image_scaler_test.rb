@@ -43,8 +43,8 @@ class ImageScalerTest < ActiveSupport::TestCase
 
     test "should remove files from destination directory that doesn't exist in source directory if delete option is set" do
       Dir.mktmpdir do |dir|
-        test_file_1 = File.join(dir, 'file.txt')
-        test_file_2 = File.join(dir, 'dinosaurs', 'file.txt')
+        test_file_1 = File.join(dir, 'file1.txt')
+        test_file_2 = File.join(dir, 'dinosaurs', 'file2.txt')
         FileUtils.touch(test_file_1)
         Dir.mkdir(File.join(dir, 'dinosaurs'))
         FileUtils.touch(test_file_2)
