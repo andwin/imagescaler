@@ -70,6 +70,23 @@ class ImageScalerTest < ActiveSupport::TestCase
         end
       end
     end
+
+    test "should not remove files from destination directory that exists in the source directory" do
+      Dir.mktmpdir do |source_dir|
+        Dir.mktmpdir do |destination_dir|
+          FileUtils.touch(File.join(source_dir, 'photo.jpg'))
+          FileUtils.touch(File.join(destination_dir, 'photo.jpg'))
+
+          FileUtils.touch(File.join(source_dir, 'picture.cr2'))
+          FileUtils.touch(File.join(destination_dir, 'picture_cr2.jpg'))
+
+          ImageScaler.remove_extra_files_from_distination source_dir, destination_dir
+
+          assert File.exists?(File.join(destination_dir, 'photo.jpg')), 'This file exists in the source directory so it should not have been removed'
+          assert File.exists?(File.join(destination_dir, 'picture_cr2.jpg')), 'This file exists in the source directory so it should not have been removed'
+        end
+      end
+    end
   end
 
   class RescaleImage < ActiveSupport::TestCase

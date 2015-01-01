@@ -21,14 +21,17 @@ class ImageScaler
   end
 
   def self.remove_extra_files_from_distination source_dir, destination_dir, options={}
-    Dir.entries(destination_dir).each do |filename|
-      unless File.exists?(File.join(source_dir, filename))
-        if options[:verbose]
-          puts 'Deleting extra file ' + File.join(destination_dir, filename)
-        end
+    destination_dir_files = Dir.entries(destination_dir).reject{|filename| File.directory?(File.join(destination_dir, filename))}
 
-        FileUtils.rm(File.join(destination_dir, filename))
+    Dir.entries(source_dir).each do |filename|
+      destination_dir_files.delete(output_file_name(filename))
+    end
+
+    destination_dir_files.each do |filename|
+      if options[:verbose]
+        puts 'Deleting extra file ' + File.join(destination_dir, filename)
       end
+      FileUtils.rm(File.join(destination_dir, filename))
     end
   end
 
