@@ -32,6 +32,23 @@ Install the ruby dependencies by running
 bundle
 ```
 
+## Usage
+
+```
+./image_scaler.rb 
+Usage: image_scaler.rb source_dir destination_dir [options]
+        --width        Width of output images
+        --height       Height of output images
+    -q, --quality      Output image quality
+    -d, --delete       Delete extra files from distination
+    -v, --verbose      Verbose output
+    -h, --help         Display this help message.
+```
+
+```
+image_scaler.rb  ~/Pictures/album/ ~/Pictures/resized/ --width 2560 --height 1440 -v -d
+```
+
 ## Tests
 Run the tests like this:
 ```
