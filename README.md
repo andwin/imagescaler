@@ -3,6 +3,8 @@
 Command line utillity to rescale photo collections
 
 ## Setup
+Clone this repo and add the directory to your path.
+
 You need to have [Ruby](https://www.ruby-lang.org/en/) and [ImageMagick](http://www.imagemagick.org/) installed.
 ```
 # Arch
